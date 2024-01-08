@@ -1,0 +1,43 @@
+<div class="content-wrapper">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <h1 class="alert alert-success" th:if="${success}" th:text="${success}"></h1>
+            <h1 class="alert alert-danger" th:if="${error}" th:text="${error}"></h1>
+            <div class="card-body">
+                <h4 class="card-title">Thêm blog</h4>
+                <form class="forms-sample" method="post" enctype="multipart/form-data"
+                    th:action="@{/admin/luu-blog}" th:object="${blog}" role="form">
+                    <div class="form-group">
+                        <label for="title">Tiêu đề</label>
+                        <input type="text" th:field="*{title}" class="form-control" id="title" placeholder="Tên blog" name="title">
+                        <span th:errors="*{title}" class="text-danger" th:if="${#fields.hasErrors('title')}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="img">Ảnh</label>
+                        <input type="file" th:field="*{blog_image}" class="form-control" id="img" name="image_blog" accept="image/*">
+                        <span th:errors="*{blog_image}" class="text-danger" th:if="${#fields.hasErrors('blog_image')}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Nội dung</label>
+                        <textarea id="content" class="form-control" th:text="${blog_content}" name="blog_content"></textarea>
+                        <span th:errors="*{blog_content}" class="text-danger" th:if="${#fields.hasErrors('blog_content')}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Trạng thái</label>
+                        <select name="status" th:field="*{status}" id="status" class="form-control">
+                            <option value="1">Hiển thị</option>
+                            <option value="0">Ẩn</option>
+                        </select>
+                        <span th:errors="*{status}" class="text-danger" th:if="${#fields.hasErrors('status')}"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    <a class="btn btn-light" href="/admin/blog">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    CKEDITOR.replace("content");
+</script>

@@ -1,0 +1,27 @@
+<div class="content-wrapper">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4 class="card-title" th:text="${blog.title}"></h4>
+                        <h4>Trạng thái:
+                            <label class="text-success" th:if="${blog.status == 1}">Hiển thị</label>
+                            <label class="text-danger" th:if="${blog.status == 0}">Ẩn</label>
+                        </h4>
+                    </div>
+                    <div class="col-md-8">
+                        <div>
+                            <img th:src="@{'uploads/blog/' + ${blog.blog_image}}" alt="blog">
+                        </div>
+                    </div>
+                </div>
+
+                <blockquote class="blockquote">
+                    <h4>Mô tả</h4>
+                    <p id="content" th:utext="${blog.blog_content}"></p>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</div>

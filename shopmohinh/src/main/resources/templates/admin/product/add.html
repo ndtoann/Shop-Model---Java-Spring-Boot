@@ -1,0 +1,68 @@
+<div class="content-wrapper">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <h1 class="alert alert-success" th:if="${success}" th:text="${success}"></h1>
+            <h1 class="alert alert-danger" th:if="${error}" th:text="${error}"></h1>
+            <div class="card-body">
+                <h4 class="card-title">Thêm sản phẩm</h4>
+                <form class="forms-sample" method="post" enctype="multipart/form-data"
+                    th:action="@{/admin/luu-san-pham}" th:object="${product}" role="form">
+                    <div class="form-group">
+                        <label for="product_name">Tên sản phẩm</label>
+                        <input type="text" th:field="*{product_name}" class="form-control" id="product_name"
+                            placeholder="Tên sản phẩm" name="product_name">
+                        <span th:errors="*{product_name}" class="text-danger" th:if="${#fields.hasErrors('product_name')}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="img">Ảnh chính</label>
+                        <input type="file" th:field="*{product_image}" class="form-control" id="img" name="product_image" accept="image/*">
+                            <span th:errors="*{product_image}" class="text-danger" th:if="${#fields.hasErrors('product_image')}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="list_img">Ảnh chi tiết (Chọn được nhiều ảnh)</label>
+                        <input type="file" th:field="*{images}" class="form-control" id="list_img" name="images[]" accept="image/*" multiple>
+                            <span th:errors="*{images}" class="text-danger" th:if="${#fields.hasErrors('images')}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Giá (vnđ)</label>
+                        <input type="number" th:field="*{price}" class="form-control" id="price" placeholder="Giá" name="price">
+                            <span th:errors="*{price}" class="text-danger" th:if="${#fields.hasErrors('price')}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="desc">Mô tả</label>
+                        <textarea id="desc" th:field="*{description}" class="form-control" name="description"></textarea>
+                            <span th:errors="*{description}" class="text-danger" th:if="${#fields.hasErrors('description')}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="detail">Chi tiết</label>
+                        <textarea id="detail" th:field="*{detail}" class="form-control" name="detail"></textarea>
+                            <span th:errors="*{detail}" class="text-danger" th:if="${#fields.hasErrors('detail')}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Danh mục</label>
+                        <select name="category_id" th:field="*{category}" id="category" class="js-example-basic-multiple w-100">
+                            <option value="">Chọn danh mục</option>
+                            <option th:value="${category.id}" th:each="category: ${categories}">[[${category.cate_name}]]</option>
+                        </select>
+                            <span th:errors="*{category}" class="text-danger" th:if="${#fields.hasErrors('category')}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Trạng thái</label>
+                        <select name="status" th:field="*{status}" id="status" class="form-control">
+                            <option value="1">Hiển thị</option>
+                            <option value="0">Ẩn</option>
+                        </select>
+                            <span th:errors="*{status}" class="text-danger" th:if="${#fields.hasErrors('status')}"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    <a class="btn btn-light" href="/admin/san-pham">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    CKEDITOR.replace("desc");
+    CKEDITOR.replace("detail");
+</script>

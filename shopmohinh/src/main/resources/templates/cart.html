@@ -1,0 +1,86 @@
+<div class="cart-content">
+    <div class="container">
+        <div class="row">
+            <div class="left col-lg-8">
+                <h4 class="title">Giỏ hàng của bạn (Có [[${totalQuantity}]] sản phẩm trong giỏ hàng của bạn)</h4>
+                    <div class="table-responsive text-center">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Ảnh</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Đơn giá</th>
+                                    <th>Số lượng</th>
+                                    <th>Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr th:each="item: ${cart.items}">
+                                        <td><img th:src="@{'uploads/product/' + ${item.product.product_image}}"
+                                                alt="image"></td>
+
+                                        <td><a th:href="@{'/san-pham?id=' + ${item.product.id}}">[[${item.product.productName}]]</a>
+                                        </td>
+                                        <td>[[${#numbers.formatDecimal(item.product.price, 2, 'COMMA', 0, 'POINT')}]] <span>đ</span></td>
+                                        <td th:text="${item.quantity}"></td>
+                                        <td>
+                                            <a th:href="@{'/xoa-san-pham/' + ${item.product.id}}"><i
+                                                    class="fa-solid fa-x"></i></a>
+                                        </td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+            <div class="right col-lg-4">
+                <h4 class="title">Thanh toán</h4>
+                <div class="price">
+                    <p>Sản phẩm</p>
+                    <p class="price-num">[[${#numbers.formatDecimal(totalPrice, 2, 'COMMA', 0, 'POINT')}]]<sup>đ</sup></p>
+                </div>
+                <div class="price">
+                    <p>Cần thanh toán</p>
+                    <p class="price-num">[[${#numbers.formatDecimal(totalPrice, 2, 'COMMA', 0, 'POINT')}]]<sup>đ</sup></p>
+                </div>
+                <div class="btn-order">
+                    <a th:href="@{/thanh-toan}">Thanh toán</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:if="${successAddCart}">
+    swal({
+        title: "Thành công",
+        text: "Đã thêm sản phẩm vào giỏ hàng",
+        icon: "success",
+        button: "Ok!",
+    });
+</script>
+
+<script th:if="${successDelCart}">
+    swal({
+        title: "Thành công",
+        text: "Đã xóa sản phẩm",
+        icon: "success",
+        button: "Ok!",
+    });
+</script>
+
+<script th:if="${successCheckout}">
+    swal({
+        title: "Đặt hàng thành công",
+        text: "Đơn hàng đang được xử lý!",
+        icon: "success",
+        button: "Ok!",
+    });
+</script>
+<script th:if="${errorCheckout}">
+    swal({
+        title: "Đặt hàng không thành công",
+        text: "Vui lòng thử lại sau hoặc liên hệ 09xxx3xxx!",
+        icon: "success",
+        button: "Ok!",
+    });
+</script>

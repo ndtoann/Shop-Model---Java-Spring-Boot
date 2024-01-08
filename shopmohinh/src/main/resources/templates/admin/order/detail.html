@@ -1,0 +1,115 @@
+<div class="content-wrapper">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 class="card-title">Thông tin khách hàng</h4>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>Họ tên</th>
+                                    <td th:text="${order.name_customer}"></td>
+                                </tr>
+                                <tr>
+                                    <th>Số điện thoại</th>
+                                    <td th:text="${order.tel}"></td>
+                                </tr>
+                                <tr>
+                                    <th>Email</th>
+                                    <td th:text="${order.email}"></td>
+                                </tr>
+                                <tr>
+                                    <th>Địa chỉ</th>
+                                    <input type="hidden" th:value="${order.city_id}" id="val-city">
+                                    <input type="hidden" th:value="${order.district_id}" id="val-district">
+                                    <input type="hidden" th:value="${order.ward_id}" id="val-ward">
+                                    <td id="address">(trống)</td>
+                                </tr>
+                                <tr>
+                                    <th>Địa chỉ chi tiết</th>
+                                    <td th:text="${order.address}"></td>
+                                </tr>
+                                <tr>
+                                    <th>Đóng gói</th>
+                                    <td th:text="${order.method_pack}"></td>
+                                </tr>
+                                <tr>
+                                    <th>Phương thức thanh toán</th>
+                                    <td th:text="${order.method_checkout}"></td>
+                                </tr>
+                                <tr>
+                                    <th>Ghi chú</th>
+                                    <td th:text="${order.note}"></td>
+                                </tr>
+                                <tr>
+                                    <th>Ngày đặt hàng</th>
+                                    <td th:text="${#temporals.format(order.created_at, 'yyyy-MM-dd')}"><label class="badge badge-info"></label></td>
+                                </tr>
+                                <tr>
+                                    <th>Trạng thái</th>
+                                    <td>
+                                        <label class="badge badge-warning" th:if="${order.status == 0}">Đang chờ</label>
+                                        <label class="badge badge-warning" th:if="${order.status == 1}">Đang giao hàng</label>
+                                        <label class="badge badge-success" th:if="${order.status == 2}">Đã thanh toán</label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-top: 50px;">
+                        <h4 class="card-title">Sản phẩm đặt mua</h4>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Ảnh</th>
+                                        <th>Giá</th>
+                                        <th>Số lượng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        <tr th:each="product: ${order.orderDetails}">
+                                            <td th:text="${product.product_name}"></td>
+                                            <td><img th:src="@{'/uploads/product/' + ${product.product_image}}"
+                                                    alt="img"></td>
+                                            <td class="text-info">[[${#numbers.formatDecimal(product.price, 2, 'COMMA', 0, 'POINT')}]]<sup>đ</sup></td>
+                                            <td th:text="${product.quantity}"></td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
+                        <div>
+                            <h3>Tổng tiền: <span class="text-success">[[${#numbers.formatDecimal(order.total_money, 2, 'COMMA', 0, 'POINT')}]]
+                                    <sup>đ</sup></span></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script>
+    var address = document.getElementById("address");
+    var Parameter = {
+        url: "https://provinces.open-api.vn/api/?depth=3",
+        method: "GET",
+        responseType: "application/json",
+    };
+    var promise = axios(Parameter);
+    promise.then(function(result) {
+        renderCity(result.data);
+    });
+
+    function renderCity(data) {
+        const dataCity = data.filter(n => n.code == $('#val-city').val());
+        const dataDistrict = dataCity[0].districts.filter(n => n.code == $('#val-district').val());
+        const dataWard = dataDistrict[0].wards.filter(n => n.code == $('#val-ward').val());
+
+        address.innerText = `${dataWard[0].name} - ${dataDistrict[0].name} - ${dataCity[0].name}`;
+    }
+</script>

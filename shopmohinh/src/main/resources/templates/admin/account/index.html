@@ -1,0 +1,51 @@
+<div class="content-wrapper">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <h1 class="alert alert-success" th:if="${success}" th:text="${success}"></h1>
+            <h1 class="alert alert-danger" th:if="${error}" th:text="${error}"></h1>
+            <div class="card-body">
+                <h4 class="card-title">Danh sách tài khoản</h4>
+                <div class="form-filter">
+                    <form method="get">
+                        <div class="row">
+                            <div class="form-group col-lg-8">
+                                <label for="name">Nhập tên cần tìm</label>
+                                <input type="text" name="fullname" id="name" class="form-control">
+                            </div>
+                            <div class="form-group col-lg-2">
+                                <br>
+                                <button type="submit" class="btn btn-success">Tìm kiếm</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Tên</th>
+                                <th>Email</th>
+                                <th>Quyền</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="user: ${listUser}">
+                                <td th:text="${user.fullname}"></td>
+                                <td th:text="${user.email}"></td>
+                                <td class=" text-success">
+                                    <p th:each="role : ${user.roles}" th:text="${role.name}"></p>
+                                </td>
+                                <td>
+                                    <a th:href="@{'/admin/tai-khoan/xoa-tai-khoan/' + ${user.id}}"
+                                        class="btn btn-inverse-danger btn-rounded btn-icon"><i
+                                            class="mdi mdi-delete-forever" title="Xóa"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

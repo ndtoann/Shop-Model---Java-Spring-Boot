@@ -1,0 +1,24 @@
+<section class="search-page">
+    <div class="container">
+        <div class="heading-page text-center">
+            <h4 class="title">Tìm kiếm</h4>
+            <p class="sub-txt">Có [[${productCount}]] sản phẩm cho kết quả tìm kiếm</p>
+        </div>
+        <p class="sub-txt-result">Kết quả tìm kiếm cho <strong> " [[${keySearch}]] "</strong></p>
+        <div class="list-result">
+                <!-- <h4 style="margin-left: 50px;">Không tìm thấy kết quả phù hợp</h4> -->
+                <div class="item" th:each="product: ${products}">
+                    <a th:href="@{'/san-pham?id=' + ${product.id}}" title="Text">
+                        <img th:src="@{'uploads/product/' + ${product.product_image}}"
+                            alt="">
+                        <h4 class="name" th:text="${product.productName}"></h4>
+                    </a>
+                    <p class="price">[[${#numbers.formatDecimal(product.price, 2, 'COMMA', 0, 'POINT')}]]<sup>đ</sup></p>
+                </div>
+        </div>
+        <div class="pagi">
+            <div class="pagination text-center">
+            </div>
+        </div>
+    </div>
+</section>

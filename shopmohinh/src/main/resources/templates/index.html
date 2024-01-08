@@ -1,0 +1,236 @@
+<div class="slider">
+    <div class="slider_item">
+        <div class="img">
+            <a href=""><img src="/images/slide/slideshow_1.webp" alt="img"></a>
+        </div>
+    </div>
+    <div class="slider_item">
+        <div class="img">
+            <a href=""><img src="/images/slide/slideshow_2.webp" alt="img"></a>
+        </div>
+    </div>
+    <div class="slider_item">
+        <div class="img">
+            <a href=""><img src="/images/slide/slideshow_3.webp" alt="img"></a>
+        </div>
+    </div>
+    <div class="slider_item">
+        <div class="img">
+            <a href=""><img src="/images/slide/slideshow_4.webp" alt="img"></a>
+        </div>
+    </div>
+    <div class="slider_item">
+        <div class="img">
+            <a href=""><img src="/images/slide/slideshow_5.webp" alt="img"></a>
+        </div>
+    </div>
+    <div class="slider_item">
+        <div class="img">
+            <a href=""><img src="/images/slide/slideshow_9.webp" alt="img"></a>
+        </div>
+    </div>
+</div>
+
+<div class="home-privacy">
+    <div class="container">
+        <div class="slide-home-privacy">
+            <div class="item">
+                <a href="#" class="link-item">
+                    <div class="imgs">
+                        <img src="images/home-privacy/privacy_1.webp" alt="img">
+                    </div>
+                    <div class="content">
+                        <p class="title">Uy tín hàng đầu</p>
+                        <span class="sub-title">Cửa hàng mô hình lớn nhất Việt Nam</span>
+                    </div>
+                </a>
+            </div>
+            <div class="item">
+                <a href="#" class="link-item">
+                    <div class="imgs">
+                        <img src="images/home-privacy/privacy_2.webp" alt="img">
+                    </div>
+                    <div class="content">
+                        <p class="title">Miễn phí đổi trả</p>
+                        <span class="sub-title">Miễn phí đổi trả khi sản phẩm gặp vấn đề</span>
+                    </div>
+                </a>
+            </div>
+            <div class="item">
+                <a href="#" class="link-item">
+                    <div class="imgs">
+                        <img src="images/home-privacy/privacy_3.webp" alt="img">
+                    </div>
+                    <div class="content">
+                        <p class="title">Sản phẩm đa dạng</p>
+                        <span class="sub-title">Luôn cập nhật những sản phẩm mới nhất</span>
+                    </div>
+                </a>
+            </div>
+            <div class="item">
+                <a href="#" class="link-item">
+                    <div class="imgs">
+                        <img src="images/home-privacy/privacy_4.webp" alt="img">
+                    </div>
+                    <div class="content">
+                        <p class="title">Giao hàng trong 1 giờ</p>
+                        <span class="sub-title">Giao hàng nhanh chóng và tiện lợi</span>
+                    </div>
+                </a>
+            </div>
+            <div class="item">
+                <a href="#" class="link-item">
+                    <div class="imgs">
+                        <img src="images/home-privacy/privacy_5.webp" alt="img">
+                    </div>
+                    <div class="content">
+                        <p class="title">Tích lũy điểm thưởng</p>
+                        <span class="sub-title">Ưu đãi hấp dẫn dành cho khách hàng thân thiết</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container">
+        <div class="product-new">
+            <h2 class="title text-center">
+                <i class="fa fa-star icon_before"></i>
+                <span>Sản phẩm mới</span>
+                <i class="fa fa-star icon_before"></i>
+            </h2>
+            <div class="banner">
+                <img src="/images/collection_one_banner.jpg" alt="img">
+            </div>
+            <!-- Tab links -->
+            <div class="tabs text-center">
+                <button class="tablinks active" data-electronic="car">Ô tô</button>
+                <button class="tablinks" data-electronic="motor">Mô tô</button>
+                <button class="tablinks" data-electronic="plane">Máy bay</button>
+            </div>
+
+            <!-- Tab content -->
+            <div class="wrapper_tabcontent">
+                <div id="car" class="tabcontent active">
+                    <div class="tabcontent-product">
+                        <div class="item" th:each="product, iterStat: ${listOto}" th:if="${iterStat.index lt 4}">
+                            <img class="gift" src="/images/gift.webp" alt="gift">
+                            <img class="new" src="/images/new.webp" alt="new">
+                            <a th:href="@{'/san-pham?id=' + ${product.id}}" th:title="${product.productName}">
+                                <img th:src="@{'/uploads/product/' + ${product.product_image}}" alt="img">
+                                <h4 class="name" th:text="${product.productName}"></h4>
+                            </a>
+                            <p class="price">[[${#numbers.formatDecimal(product.price, 2, 'COMMA', 0, 'POINT')}]]<sup>đ</sup></p>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <a th:href="@{'/danh-muc?id=1'}" class="more">Xem tất cả</a>
+                    </div>
+                </div>
+
+                <div id="motor" class="tabcontent">
+                    <div class="tabcontent-product ">
+                        <div class="item" th:each="product, iterStat: ${listMoto}" th:if="${iterStat.index lt 4}">
+                            <img class="gift" src="/images/gift.webp" alt="gift">
+                            <img class="new" src="/images/new.webp" alt="new">
+                            <a th:href="@{'/san-pham?id=' + ${product.id}}" th:title="${product.productName}">
+                                <img th:src="@{'/uploads/product/' + ${product.product_image}}" alt="img">
+                                <h4 class="name" th:text="${product.productName}"></h4>
+                            </a>
+                            <p class="price">[[${#numbers.formatDecimal(product.price, 2, 'COMMA', 0, 'POINT')}]]<sup>đ</sup></p>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <a th:href="${'/danh-muc?id=3'}" class="more">Xem tất cả</a>
+                    </div>
+                </div>
+
+                <div id="plane" class="tabcontent">
+                    <div class="tabcontent-product ">
+                        <div class="item" th:each="product, iterStat: ${listMayBay}" th:if="${iterStat.index lt 4}">
+                            <img class="gift" src="/images/gift.webp" alt="gift">
+                            <img class="new" src="/images/new.webp" alt="new">
+                            <a th:href="@{'/san-pham?id=' + ${product.id}}" th:title="${product.productName}">
+                                <img th:src="@{'/uploads/product/' + ${product.product_image}}" alt="img">
+                                <h4 class="name" th:text="${product.productName}"></h4>
+                            </a>
+                            <p class="price">[[${#numbers.formatDecimal(product.price, 2, 'COMMA', 0, 'POINT')}]]<sup>đ</sup></p>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <a th:href="${'/danh-muc?id=5'}" class="more">Xem tất cả</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="index-order">
+            <h2 class="title text-center">
+                <i class="fa fa-star icon_before"></i>
+                <span>Góc nhận order</span>
+                <i class="fa fa-star icon_before"></i>
+            </h2>
+            <div class="banner">
+                <img src="/images/index_orderbanner.webp?" alt="img">
+            </div>
+            <div class="order-list">
+                <div class="item" th:each="product, iterStat: ${listOrder}" th:if="${iterStat.index lt 4}">
+                    <img class="gift" src="/images/gift.webp" alt="gift">
+                    <img class="new" src="/images/new.webp" alt="new">
+                    <a th:href="@{'/san-pham?id=' + ${product.id}}" th:title="${product.productName}">
+                        <img th:src="@{'/uploads/product/' + ${product.product_image}}" alt="img">
+                        <h4 class="name" th:text="${product.productName}"></h4>
+                    </a>
+                    <p class="price">[[${#numbers.formatDecimal(product.price, 2, 'COMMA', 0, 'POINT')}]]<sup>đ</sup></p>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="#" class="more">Xem tất cả</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="collections">
+    <div class="container">
+        <h2 class="title">
+            <i class="fa fa-star icon_before"></i>
+            <span>Bộ sưu tập</span>
+            <i class="fa fa-star icon_before"></i>
+        </h2>
+        <a href="#" class="item">
+            <img src="/images/collections/index_shopby_1.webp" alt="img">
+            <span>Lamborghini</span>
+        </a>
+        <a href="#" class="item">
+            <img src="/images/collections/index_shopby_2.webp" alt="img">
+            <span>Mercedes-Benz</span>
+        </a>
+        <a href="#" class="item">
+            <img src="/images/collections/index_shopby_3.webp" alt="img">
+            <span>Ducati</span>
+        </a>
+        <a href="#" class="item">
+            <img src="/images/collections/index_shopby_4.webp" alt="img">
+            <span>Siêu xe</span>
+        </a>
+        <a href="#" class="item">
+            <img src="/images/collections/index_shopby_5.webp" alt="img">
+            <span>Xe bán tải</span>
+        </a>
+        <a href="#" class="item">
+            <img src="/images/collections/index_shopby_6.webp" alt="img">
+            <span>Xe cổ</span>
+        </a>
+        <a href="#" class="item">
+            <img src="/images/collections/index_shopby_7.webp" alt="img">
+            <span>Xe cảnh sát</span>
+        </a>
+        <a href="#" class="item">
+            <img src="/images/collections/index_shopby_8.webp" alt="img">
+            <span>Xe độ</span>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+<div class="content-wrapper">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <h1 class="alert alert-success" th:if="${success}" th:text="${success}"></h1>
+            <h1 class="alert alert-danger" th:if="${error}" th:text="${error}"></h1>
+            <div class="card-body">
+                <h4 class="card-title">Danh mục sản phẩm</h4>
+                <div class="form-filter">
+                    <form method="get">
+                        <div class="row">
+                            <div class="form-group col-lg-2">
+                                <label for="status">Trạng thái</label>
+                                <select name="status" id="status" class="form-control">
+                                    <option value="active">Hiển thị</option>
+                                    <option value="unactive">Ẩn</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-lg-8">
+                                <label for="name">Nhập tên danh mục</label>
+                                <input type="text" name="name_cate" id="name" class="form-control">
+                            </div>
+                            <div class="form-group col-lg-2">
+                                <br>
+                                <button type="submit" class="btn btn-success">Tìm kiếm</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Ảnh</th>
+                                <th>Tên</th>
+                                <th>Trạng thái</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="category: ${listCategories}">
+                                <td><img th:src="@{'/uploads/category/' + ${category.cate_image}}" alt="category"></td>
+                                <td th:text="${category.cate_name}"></td>
+                                <td>
+                                    <label class="badge badge-success" th:if="${category.status}==1">Hiển thị</label>
+                                    <label class="badge badge-danger" th:if="${category.status}==0">Ẩn</label>
+                                </td>
+                                <td>
+                                    <a th:href="@{'/admin/cap-nhat-danh-muc?id=' + ${category.id}}"
+                                        class="btn btn-inverse-primary btn-rounded btn-icon"><i
+                                            class="mdi mdi-settings " title="Cập nhật"></i></a>
+                                    <a th:href="@{'/admin/xoa-danh-muc/' + ${category.id}}"
+                                        class="btn btn-inverse-danger btn-rounded btn-icon"><i
+                                            class="mdi mdi-delete-forever" title="Xóa"></i></a>
+                                    <!-- <a href="#"
+                                        onclick="if(confirm('Xác nhận xóa?') == true){ document.getElementsByClassName('linkDelete').click() }"
+                                        class="btn btn-inverse-danger btn-rounded btn-icon"><i
+                                            class="mdi mdi-delete-forever" title="Xóa"></i></a> -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

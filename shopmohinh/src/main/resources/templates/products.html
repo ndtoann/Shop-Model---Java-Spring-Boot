@@ -1,0 +1,27 @@
+<section class="main-content">
+    <div class="container">
+        <div class="banner">
+            <img th:src="@{'uploads/category/' + ${category.banner}}" alt="banner">
+        </div>
+        <div class="collection-body">
+            <!-- <div class="sort">
+                <h4>Xếp theo:
+                    <a href="">Giá tăng</a>
+                    <a href="">Giá giảm</a>
+                </h4>
+            </div> -->
+            <div class="list-product">
+                    <div class="item" th:each="product: ${listProducts}">
+                        <img class="gift" src="/images/gift.webp" alt="Gift">
+                        <a th:href="@{'/san-pham?id=' + ${product.id}}" th:title="${product.productName}">
+                            <img th:src="@{'/uploads/product/' + ${product.product_image}}" alt="img">
+                            <h4 class="name" th:text="${product.productName}"></h4>
+                        </a>
+                        <p class="price">[[${#numbers.formatDecimal(product.price, 2, 'COMMA', 0, 'POINT')}]]<sup>đ</sup></p>
+                    </div>
+            </div>
+            <div class="pagination text-center">
+            </div>
+        </div>
+    </div>
+</section>

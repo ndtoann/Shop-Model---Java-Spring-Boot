@@ -1,0 +1,68 @@
+<div class="content-wrapper">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <h1 class="alert alert-success" th:if="${success}" th:text="${success}"></h1>
+            <h1 class="alert alert-danger" th:if="${error}" th:text="${error}"></h1>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4 class="card-title" th:text="${product.productName}"></h4>
+                        <div style="display: flex; padding: 50px; justify-content: center;">
+                            <img th:src="@{'/uploads/product/' + ${product.product_image}}" alt="img">
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <h4 class="card-title">Ảnh chi tiết sản phẩm</h4>
+                        <div class="list_prd_img">
+                                <div class="item" th:each="image: ${product.images}">
+                                    <img th:src="@{'/uploads/product/' + ${image.image}}" alt="">
+                                    <a th:href="@{'/admin/xoa-anh-san-pham/' + ${image.id}} ">
+                                        <i class="delete mdi mdi-close-box-outline"></i>
+                                    </a>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Tên sản phẩm</th>
+                                <th th:text="${product.productName}"></th>
+                            </tr>
+                            <tr>
+                                <th>Giá</th>
+                                <th style="color: red;">[[${#numbers.formatDecimal(product.price, 2, 'COMMA', 0, 'POINT')}]]<sup>đ</sup></th>
+                            </tr>
+                            <tr>
+                                <th>Danh mục</th>
+                                <th th:text="${product.category.cate_name}"></th>
+                            </tr>
+                            <tr>
+                                <th>Trạng thái</th>
+                                <th>
+                                    <label class="text-success" th:if="${product.status==1}">Hiển thị</label>
+                                    <label class="text-danger" th:if="${product.status==0}">Ẩn</label>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Ngày thêm</th>
+                                <th th:text="${product.created_at}"></th>
+                            </tr>
+                        </table>
+                    </div>
+                    <blockquote class="blockquote">
+                        <h4>Mô tả</h4>
+                        <p id="desc" th:utext="${product.description}"></p>
+                    </blockquote>
+                    <blockquote class="blockquote">
+                        <h4>Chi tiết</h4>
+                        <p id="detail" th:utext="${product.detail}"></p>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
